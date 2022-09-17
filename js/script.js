@@ -11,15 +11,18 @@ function addItem(item) {
   itemButtonNode.innerHTML = "delete";
   listItemNode.append(itemButtonNode);
   listNode.append(listItemNode);
-  listNode.addEventListener("click", (event) => {
-    let isRemoveButton = event.target.className === "remove-button";
-    if (isRemoveButton) {
-      let removeButton = event.target;
-      let albumTitleBlock = removeButton.closest(".album-title");
-      albumTitleBlock.remove();
-    }
-  });
+
 }
+
+listNode.addEventListener("click", (event) => {
+  let isRemoveButton = event.target.className === "remove-button";
+  if (isRemoveButton) {
+    let removeButton = event.target;
+    let albumTitleBlock = removeButton.closest(".album-title");
+    albumTitleBlock.remove();
+  }
+});
+
 fetch("https://jsonplaceholder.typicode.com/albums")
   .then((response) => response.json())
   .then((result) => result.forEach((item) => addItem(item)))
